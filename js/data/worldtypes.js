@@ -443,4 +443,29 @@ SharkGame.WorldTypes = {
             clam: 1e7,
         },
     },
+    haunted: {
+        name: "Haunted",
+        vagueDesc: "totally not marine.",
+        desc: "yea i stole marine.",
+        shortDesc: "blep",
+        foresight: {
+            vagueLongDesc: "this play is gay as FUCK.",
+            longDesc: "no its still gay as shit.",
+            missing: ["laser"],
+            present: ["clam", "lobster"],
+            tip: "haha gay lmao",
+        },
+        entry: "this play is pretty spooky.",
+        style: "default",
+        includedResources: [
+            "basics",,
+        ],
+        absentResources: ["laser"],
+        modifiers: [{ type: "multiplier", modifier: "planetaryResourceBoost", resource: "fish", amount: 1 }],
+        gateRequirements: {
+            slots: {
+                fish: 11,
+            },
+        },
+        par: 55,
 };

@@ -6,7 +6,7 @@ SharkGame.Gateway = {
     transitioning: false,
     selectedWorld: "",
 
-    allowedWorlds: ["abandoned", "haven", "frigid", "shrouded", "marine", "volcanic", "tempestuous", "chaotic"],
+    allowedWorlds: ["abandoned", "haven", "frigid", "shrouded", "marine", "volcanic", "tempestuous", "chaotic", "haunted"],
 
     completedWorlds: [],
 
@@ -1348,6 +1348,11 @@ SharkGame.Gateway.Messages = {
             "The snails always had the potential, they just needed your support.",
             "You too, are a creature of potential.",
         ],
+        haunted: [
+            "rattle?",
+            "hahagay",
+        ],
+    },
     },
     loss: [
         "No matter. You will succeed in the future, no doubt.",
