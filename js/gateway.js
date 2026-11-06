@@ -1353,7 +1353,6 @@ SharkGame.Gateway.Messages = {
             "hahagay",
         ],
     },
-    },
     loss: [
         "No matter. You will succeed in the future, no doubt.",
         "Never give in. Never surrender. Empty platitudes, perhaps, but sound advice nonetheless.",

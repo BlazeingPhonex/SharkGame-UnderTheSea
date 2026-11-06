@@ -458,7 +458,7 @@ SharkGame.WorldTypes = {
         entry: "this play is pretty spooky.",
         style: "default",
         includedResources: [
-            "basics",,
+            "basics",
         ],
         absentResources: ["laser"],
         modifiers: [{ type: "multiplier", modifier: "planetaryResourceBoost", resource: "fish", amount: 1 }],
@@ -468,4 +468,5 @@ SharkGame.WorldTypes = {
             },
         },
         par: 55,
-};
+    },
+}
