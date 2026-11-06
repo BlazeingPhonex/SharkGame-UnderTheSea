@@ -585,11 +585,12 @@ SharkGame.HomeMessages = {
                 message: "The gate hums to life, slowly siphoning the lingering chaos energy from the water. A turtle swims up to you, thanking you and the snails for not giving up. You're unsure how to respond.",
             },
         ],
-        /*
-        {
-            message:
-                "The jagged seafloor looks ancient, yet pristine.<br>Sponges thrive in great numbers on the rocks.",
-        },
-        */
+        haunted: [
+            {
+                name: "haunted-default",
+                message:
+                    "OoooooOoo spoopy ghosts.",
+            },
+        ],
     },
 };
