@@ -1371,7 +1371,17 @@ SharkGame.ResourceTable = {
         name: "wisps",
         singleName: "wisp",
         color: "#66DEAF",
-        desc: "A heavily diluted form of essence.",
+                desc: "A heavily diluted form of essence.",
+        value: 2,
+    },
+
+    // heh... straight up haunting it right now
+
+    bone: {
+        name: "bones",
+        singleName: "bone",
+        desc: "207 bones when i see you.",
+        color: "#E3DCC8",
         value: 2,
     },
 };
@@ -1616,6 +1626,7 @@ SharkGame.ResourceCategories = {
             "coral",
             "algae",
             "seagrass",
+            "bone",
             // "stone",
             // "gravel",
         ],

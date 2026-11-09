@@ -1231,6 +1231,7 @@ SharkGame.Gateway.PresenceFeelings = {
     billfish: "resolute survivalists?",
     snail: "withdrawn dreamers?",
     turtle: "detached wanderers?",
+    bone: "white things?",
 };
 
 SharkGame.Gateway.Messages = {

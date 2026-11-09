@@ -451,14 +451,14 @@ SharkGame.WorldTypes = {
         foresight: {
             vagueLongDesc: "this shits pretty long and vauge.",
             longDesc: "smth smth bones but longer.",
-            missing: ["kelp", "seaApple", "ray", "crab"],
-            present: [],
+            missing: ["kelp", "seaApple", "shark", "ray", "crab"],
+            present: ["bone"],
             tip: "smth smth eveyrones get get better lmao.",
         },
         entry: "You are a shark maybe.",
         style: "haunted",
-        includedResources: ["essence", "sharks", "basicmaterials", "sharkmachines", "world", "aspectAffect"],
-        absentResources: [],
+        includedResources: ["essence", "basicmaterials", "sharkmachines", "bone", "fakeFish", "world", "aspectAffect"],
+        absentResources: ["fish"],
         modifiers: [],
         gateRequirements: {
             slots: {

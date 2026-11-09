@@ -5096,8 +5096,51 @@ SharkGame.HomeActions = {
             helpText: "Switch echo production to that of crabs.",
             getSpecialTooltip() {
                 const text = `CURRENT ECHO FORM: ${SharkGame.flags.echoShiftShark ? "SHARK" : SharkGame.flags.echoShiftRay ? "RAY" : "CRAB"}`;
-                return sharktext.boldString(text);
+                                return sharktext.boldString(text);
             },
+        },
+    },
+    haunted: {
+        debugbutton: {},
+
+        catchFish: {
+            name: "Search for fish",
+            effect: {
+                resource: {
+                    fakeFish: 1,
+                },
+            },
+            removedBy: {
+                totalResourceThreshold: [{ resource: "fakeFish", threshold: 5 }],
+            },
+            cost: {},
+            prereq: {},
+            outcomes: [
+                "You find nothing.",
+                "Nothing swims.",
+                "Still nothing.",
+                "Not as far as you can see.",
+                "Nothing, just a bone...",
+            ],
+            helpText: "Look for fish.",
+        },
+        getBone: {
+            name: "Gather a bone",
+            effect: {
+                resource: {
+                    bone: 1,
+                },
+            },
+            cost: {},
+            prereq: {
+                resource: {
+                    fakeFish: 5,
+                },
+            },
+            outcomes: [
+                "Found a fish bone.",
+            ],
+            helpText: "Since there's nothing else here, why not.",
         },
     },
 };
@@ -5111,7 +5154,7 @@ SharkGame.HomeActionCategories = {
 
     basic: {
         name: "Basic",
-        actions: ["catchFish", "debugbutton", "prySponge", "prySponge2", "getClam", "getJellyfish", "catchWisp"],
+        actions: ["catchFish", "debugbutton", "prySponge", "prySponge2", "getClam", "getJellyfish", "catchWisp", "getBone"],
     },
 
     frenzy: {
