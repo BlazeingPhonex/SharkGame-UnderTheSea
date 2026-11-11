@@ -164,3 +164,10 @@ Sand Reform        organize sand collection patrols,
 Crab Reform        reform the crabs! i guess?,
 ~~Final Draft        go see the king personally,~~
 ~~Apologetic Amnesty        repay the king for damages~~
+
+### CHAOTIC
+
+### HAUNTED
+literally everything
+
+### SHORE
