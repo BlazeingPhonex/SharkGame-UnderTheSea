@@ -589,7 +589,17 @@ SharkGame.HomeMessages = {
             {
                 name: "haunted-default",
                 message:
-                    "OoooooOoo spoopy ghosts.",
+                    "You are a shark in an sea of bones. Ominous moans bubble through the water, it's best not to linger.",
+            },
+            {
+                name: "haunted-no-fish",
+                unlock: { totalResource: { fakeFish: 1 } },
+                message: "You search for fish, but there are none to be found.",
+            },
+            {
+                name: "haunted-bones",
+                unlock: { totalResource: { bone: 1 } },
+                message: "The only thing you are able to find is bones. Perhaps these will do.",
             },
         ],
     },

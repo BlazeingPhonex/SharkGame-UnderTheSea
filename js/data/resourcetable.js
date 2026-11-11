@@ -1380,7 +1380,7 @@ SharkGame.ResourceTable = {
     bone: {
         name: "bones",
         singleName: "bone",
-        desc: "207 bones when i see you.",
+        desc: "Brittle and pale.",
         color: "#E3DCC8",
         value: 2,
     },
