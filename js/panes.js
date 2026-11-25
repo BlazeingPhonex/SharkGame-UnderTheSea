@@ -381,10 +381,10 @@ SharkGame.PaneHandler = {
                         .html(`save ${tag}`)
                         .addClass("option-button")
                         .on("click", () => {
-                            const saveBackup = () => {
+                            function saveBackup() {
                                 SharkGame.Save.createTaggedSave(`Backup${tag}`);
                                 $(`#load${tag}`).removeClass("disabled");
-                            };
+                            }
                             if (SharkGame.Save.savedGameExists(`Backup${tag}`)) {
                                 SharkGame.PaneHandler.showConfirmMenu(
                                     "Overwrite Backup",
@@ -671,7 +671,6 @@ SharkGame.PaneHandler = {
         dropdown.append(current, list);
         return dropdown;
     },
-
 
     showConfirmMenu(title, text, yesText, noText, onYes) {
         const confirmDiv = $("<div>");

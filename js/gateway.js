@@ -595,13 +595,13 @@ SharkGame.Gateway = {
                 if (SharkGame.Aspects.cleanSlate.level) {
                     SharkGame.Button.makeButton("respecModeButton", "respec mode", buttonDiv, tree.toggleRefundMode);
                     SharkGame.Button.makeButton("respecButton", "respec all", buttonDiv, () => {
-SharkGame.PaneHandler.showConfirmMenu(
-    "Respec All",
-    "Are you sure you want to respec all refundable aspects?",
-    "respec",
-    "cancel",
-    () => tree.respecTree(),
-);
+                        SharkGame.PaneHandler.showConfirmMenu(
+                            "Respec All",
+                            "Are you sure you want to respec all refundable aspects?",
+                            "respec",
+                            "cancel",
+                            () => tree.respecTree(),
+                        );
                     });
                 }
 
