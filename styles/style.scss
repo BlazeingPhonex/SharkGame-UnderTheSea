@@ -2026,6 +2026,7 @@ button.planetButton {
 #keybindTable {
     td {
         padding: 0.2rem;
+        vertical-align: top;
     }
 }
 
@@ -2050,4 +2051,81 @@ select {
 
 option {
     direction: rtl;
+}
+
+.keybindDropdown {
+    text-align: right;
+    cursor: pointer;
+    @include no-select();
+}
+
+.keybindDropdownCurrent {
+    background-color: var(--color-darker);
+    padding: 0.1em 0.5em;
+
+    &::after {
+        content: " ⌄";
+    }
+}
+
+.keybindDropdownList {
+    max-height: 15em;
+    overflow-y: auto;
+    border: 2px solid var(--color-lighter);
+    margin-top: 2px;
+}
+
+.keybindDropdownOption {
+    background-color: var(--color-darker);
+    border-bottom: 2px solid var(--color-lighter);
+    padding: 0.3em 0.5em;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &:hover {
+        background-color: var(--color-dark);
+    }
+}
+
+// idk why gateway needs its own seperate one and im not smart enough for it to know why
+.gateway {
+    .keybindDropdownCurrent,
+    .keybindDropdownOption,
+    #importExportField {
+        background-color: $color-discovery-dark4;
+    }
+
+    .keybindDropdownList,
+    .keybindDropdownOption,
+    #importExportField {
+        border-color: $color-discovery;
+    }
+
+    .keybindDropdownOption:hover {
+        background-color: $color-discovery-dark2;
+    }
+
+    .keybindDropdownList::-webkit-scrollbar-track {
+        background: $color-discovery-dark2;
+    }
+
+    .keybindDropdownList::-webkit-scrollbar-thumb {
+        background-color: $color-discovery-dark;
+    }
+
+    #importExportField {
+        width: auto;
+        text-align: left;
+    }
+}
+
+#importExportField {
+    background-color: var(--color-darker);
+    color: $color-text;
+    border: 2px solid var(--color-lighter);
+    @include border-radius(5px);
+    padding: 0.2em 0.4em;
+    font-size: inherit;
 }
