@@ -1,0 +1,304 @@
+/* same colors as the home sea in the game */
+:root {
+    --color-lighter: #8e9fc0;
+    --color-light: #536892;
+    --color-med: #2e4372;
+    --color-dark: #152a55;
+    --color-darker: #061639;
+}
+
+body {
+    margin: 0;
+    background-color: var(--color-darker);
+    color: white;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+a {
+    color: var(--color-lighter);
+}
+
+/* scrollbars like the ones in the game */
+::-webkit-scrollbar {
+    width: initial;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-light);
+}
+
+/* firefox doesn't do the ones above */
+@supports not selector(::-webkit-scrollbar) {
+    html {
+        scrollbar-color: var(--color-light) var(--color-dark);
+    }
+}
+
+a:hover {
+    filter: brightness(125%);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6em 1em;
+    background-color: var(--color-dark);
+    border-bottom: 2px solid var(--color-med);
+}
+
+#wikiTitle {
+    color: white;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5em;
+    max-width: 75em;
+    margin: 0 auto;
+    padding: 1em;
+}
+
+#sidebar {
+    flex: 0 0 11em;
+    border-right: 4px double var(--color-med);
+    padding: 0 1em 0 0;
+    position: sticky;
+    top: 1em;
+    max-height: calc(100vh - 2em);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+#sidebar p {
+    margin: 0.6em 0 0.2em;
+}
+
+#sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0.6em;
+}
+
+#sidebar a {
+    text-decoration: none;
+}
+
+#sidebar a.current {
+    color: white;
+    font-weight: bold;
+}
+
+#content {
+    flex: 1;
+    min-width: 0;
+}
+
+h1,
+h2 {
+    border-bottom: 4px double var(--color-med);
+    padding-bottom: 0.2em;
+}
+
+img {
+    max-width: 100%;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid var(--color-med);
+}
+
+blockquote {
+    margin: 1em 0;
+    padding: 0.5em 1em;
+    background-color: var(--color-dark);
+    border-left: 5px solid var(--color-lighter);
+}
+
+/* tables can get wide, so they scroll sideways instead of breaking the page */
+table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+
+th,
+td {
+    border: 1px solid var(--color-light);
+    padding: 0.4em 0.6em;
+    vertical-align: top;
+}
+
+th {
+    background-color: var(--color-med);
+}
+
+tr:nth-child(even) td {
+    background-color: var(--color-dark);
+}
+
+/* the thing you jumped to with a link */
+.highlight td,
+h2.highlight,
+h3.highlight {
+    outline: 2px solid var(--color-lighter);
+}
+
+/* the info box on creature pages */
+.infobox {
+    float: right;
+    width: 20em;
+    margin: 0 0 1em 1.5em;
+    padding: 0.5em;
+    background-color: var(--color-dark);
+    border: 4px double var(--color-med);
+    text-align: center;
+}
+
+.infobox table {
+    display: table;
+    width: 100%;
+    text-align: left;
+    margin: 0.5em 0 0;
+}
+
+/* the links on the home page, made to look like the buy buttons in the game */
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1em 0;
+}
+
+.buttons p {
+    display: contents;
+}
+
+.buttons a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 12em;
+    min-height: 10em;
+    margin: 0.4em;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: var(--color-light);
+    border: 2px solid var(--color-lighter);
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 0 2px #000;
+}
+
+.buttons a:hover {
+    filter: none;
+    box-shadow: 0 0 2px 2px var(--color-lighter);
+}
+
+.buttons img {
+    width: 4.5em;
+    height: 3em;
+    object-fit: cover;
+    margin-bottom: 0.4em;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 3px var(--color-lighter);
+}
+
+/* the story slideshow */
+.slideshow {
+    max-width: 40em;
+    margin: 1.5em auto;
+    text-align: center;
+}
+
+.slideDots {
+    color: var(--color-dark);
+    font-size: 1.4em;
+    letter-spacing: 0.2em;
+}
+
+.slideDots .on {
+    color: var(--color-lighter);
+}
+
+.slideRow {
+    display: flex;
+    align-items: stretch;
+    gap: 0.6em;
+}
+
+.slideArrow {
+    width: 2.5em;
+    flex: none;
+    background-color: var(--color-darker);
+    border: 2px solid var(--color-dark);
+    border-radius: 10px;
+    color: var(--color-lighter);
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
+.slideArrow:hover {
+    box-shadow: 0 0 2px 2px var(--color-med);
+}
+
+.slidePicture {
+    flex: 1;
+}
+
+.slidePicture img {
+    display: block;
+    margin: 0.4em auto;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 5px var(--color-dark);
+}
+
+.slideText {
+    min-height: 3em;
+}
+
+/* phones */
+@media (max-width: 700px) {
+    #layout {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.5em 1em;
+    }
+
+    #sidebar {
+        position: static;
+        width: 100%;
+        max-height: none;
+        flex: none;
+        border-right: none;
+        border-bottom: 4px double var(--color-med);
+        padding: 0 0 0.5em;
+    }
+
+    #sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.2em 0.8em;
+    }
+
+    .infobox {
+        float: none;
+        width: auto;
+        margin: 0 0 1em;
+    }
+}

@@ -635,7 +635,12 @@ SharkGame.PaneHandler = {
             segment.append($("<h3>").html(version + ": "));
             const changeList = $("<ul>");
             _.each(changes, (changeLogEntry) => {
-                changeList.append($("<li>").html(changeLogEntry));
+                // using <p></p> lets you skip bullets - this is so you can add flavour text without a bullet point so its less ugly
+                if (changeLogEntry.startsWith("<p>")) {
+                    segment.append(changeLogEntry);
+                } else {
+                    changeList.append($("<li>").html(changeLogEntry));
+                }
             });
             segment.append(changeList);
             changelogContent.append(segment);

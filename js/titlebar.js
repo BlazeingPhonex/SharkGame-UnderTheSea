@@ -89,6 +89,12 @@ SharkGame.TitleBar = {
         },
     },
 
+    wikiLink: {
+        name: "wiki",
+        main: false,
+        link: "wiki/",
+    },
+
     discordLink: {
         name: "discord",
         main: false,

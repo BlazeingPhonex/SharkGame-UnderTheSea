@@ -104,12 +104,14 @@ $.extend(SharkGame, {
         "Curse of the Shark",
         "Have I Played These Sharks Before?",
         "Hollow Shark: Shark Song",
+        "Slay the Shark",
+        "Remake Intergrade",
     ],
     GAME_NAME: null,
     ACTUAL_GAME_NAME: "Shark Game",
-    VERSION: "20250127a",
+    VERSION: "20261125a",
     ORIGINAL_VERSION: 0.71,
-    VERSION_NAME: "The Tempetuous Update",
+    VERSION_NAME: "The Chaotic Update",
     EPSILON: 1e-6, // floating point comparison is a joy
     BIGGEST_SAFE_NUMBER: 1000000000000,
     MAX: 1e300,
@@ -908,10 +910,13 @@ SharkGame.Button = {
 };
 
 SharkGame.Changelog = {
-    "<a href='https://github.com/Toby222/SharkGame'>New Frontiers</a> patch 20261125a": [
-        "Replaced browser popups with in-game menus",
-        "Added confirm menu to discord and back to hub button",
-        "Added themed dropdown menu to keybinds and import/export box",
+    "<a href='https://github.com/Toby222/SharkGame'>New Frontiers</a> patch 20261125a - The Wiki Update": [
+        "<p><strong>A strange new fish has swum up from the ocean of Fandom! It speaks of heaps of knowledge you can now access from the title bar! The wiki button may be changed later to become an aspect, however I will have to finish redesigning and reformatting the wiki to seem more like a lost book before that is published!</strong></p>",
+        "Added the wiki to the game officially so Fandom is no longer used",
+        "Replaced all browser pop-ups with official menus",
+        "Added confirmation menus to the Discord and Back to Hub buttons! (Perhaps may save a minute or two of progress on accidental click)",
+        "Added a custom dropdown menu to keybinds and slightly modified look of the import/export box",
+        "The import/export and keybind dropdown now matches world theme",
     ],
     "<a href='https://github.com/Toby222/SharkGame'>New Frontiers</a> patch 20261103a": [
         "Added a reimagined Chaotic world back into the game, courtesy of <a href='https://github.com/glowkate'>Glowkate</a>!",

@@ -164,3 +164,8 @@ Sand Reform        organize sand collection patrols,
 Crab Reform        reform the crabs! i guess?,
 ~~Final Draft        go see the king personally,~~
 ~~Apologetic Amnesty        repay the king for damages~~
+
+## Wiki
+Update most pages to include missed out animals, story, stuff, artifacts when those are released
+Make it an aspect
+Reformat the wiki so that it can fit into world building, like a tome of knowledge perhaps given from the being behind the gate?
