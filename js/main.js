@@ -908,6 +908,11 @@ SharkGame.Button = {
 };
 
 SharkGame.Changelog = {
+    "<a href='https://github.com/Toby222/SharkGame'>New Frontiers</a> patch 20261125a": [
+        "Replaced browser popups with in-game menus",
+        "Added confirm menu to discord and back to hub button",
+        "Added themed dropdown menu to keybinds and import/export box",
+    ],
     "<a href='https://github.com/Toby222/SharkGame'>New Frontiers</a> patch 20261103a": [
         "Added a reimagined Chaotic world back into the game, courtesy of <a href='https://github.com/glowkate'>Glowkate</a>!",
         "Fixed several typos.",

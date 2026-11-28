@@ -35,9 +35,24 @@ SharkGame.TitleBar = {
         onClick() {
             if (main.isFirstTime()) {
                 // save people stranded on home world
-                SharkGame.PaneHandler.showResetMenu();
+                SharkGame.PaneHandler.showConfirmMenu(
+                    "Reset Game",
+                    "Are you sure you would like to reset your game?<br>You will lose <strong>ALL</strong> progress.",
+                    "reset",
+                    "do not reset",
+                    main.resetGame,
+                );
             } else {
-                SharkGame.PaneHandler.showSkipMenu();
+                SharkGame.PaneHandler.showConfirmMenu(
+                    "Skip World",
+                    "If a world is causing you too much trouble, you can go back to the gateway.<br>Want to go back to the gateway?",
+                    "go to gateway",
+                    "stay here",
+                    () => {
+                        SharkGame.wonGame = false;
+                        main.endGame();
+                    },
+                );
             }
         },
     },
@@ -77,20 +92,37 @@ SharkGame.TitleBar = {
     discordLink: {
         name: "discord",
         main: false,
-        link: "https://discord.gg/eYqApFkFPY",
+        onClick() {
+            const discordUrl = "https://discord.gg/eYqApFkFPY";
+            SharkGame.PaneHandler.showConfirmMenu(
+                "Leaving Shark Game",
+                "Clicking on this will open a new tab to the link:<br><strong>" + discordUrl + "</strong>",
+                "visit site",
+                "go back",
+                () => window.open(discordUrl, "_blank"),
+            );
+        },
     },
 
     hubLink: {
         name: "back to hub",
         main: false,
         onClick() {
-            try {
-                SharkGame.Save.saveGame();
-            } catch (err) {
-                log.addError(err);
-            }
-            log.addMessage("Saved game.");
-            window.location.href = "https://shark.tobot.dev/";
+            SharkGame.PaneHandler.showConfirmMenu(
+                "Back to Hub",
+                "Clicking on this will take you off of the game, you may lose unsaved progress.",
+                "proceed",
+                "keep sharking",
+                () => {
+                    try {
+                        SharkGame.Save.saveGame();
+                    } catch (err) {
+                        log.addError(err);
+                    }
+                    log.addMessage("Saved game.");
+                    window.location.href = "https://shark.tobot.dev/";
+                },
+            );
         },
     },
 

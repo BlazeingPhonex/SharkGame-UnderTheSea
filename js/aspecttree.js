@@ -77,9 +77,13 @@ SharkGame.AspectTree = {
                 return "Respec ALL refundable aspects.";
             },
             clicked() {
-                if (confirm("Are you sure you want to respec ALL refundable aspects?")) {
-                    tree.respecTree();
-                }
+                SharkGame.PaneHandler.showConfirmMenu(
+                    "Respec All",
+                    "Are you sure you want to respec ALL refundable aspects?",
+                    "respec",
+                    "cancel",
+                    () => tree.respecTree(),
+                );
             },
             getUnlocked() {
                 return SharkGame.Aspects.cleanSlate.level > 0;
@@ -398,6 +402,7 @@ SharkGame.AspectTree = {
     render() {
         const context = tree.context;
         if (context === undefined) return;
+        if (!document.getElementById("backToGateway")) return;
         const transform = tree.panzoom.getTransform();
 
         // For some reason, it scrolls indefinitely if you don't set this every frame
@@ -682,7 +687,7 @@ SharkGame.AspectTree = {
         }
         tree.updateRequirementReference();
         if (SharkGame.Settings.current.doAspectTable === "table") {
-            this.drawTable(document.getElementById("aspectTable"));
+            this.drawTable($("#aspectTable"));
             this.updateEssenceCounter();
         } else {
             requestAnimationFrame(tree.render);

@@ -341,8 +341,14 @@ SharkGame.PaneHandler = {
                         if (importText === "") {
                             SharkGame.PaneHandler.nextPaneInStack();
                             log.addError("You need to paste something in first!");
-                        } else if (confirm("Are you absolutely sure? This will override your current save.")) {
-                            SharkGame.Save.importData(importText);
+                        } else {
+                            SharkGame.PaneHandler.showConfirmMenu(
+                                "Import Save",
+                                "Are you absolutely sure? This will override your current save.",
+                                "import",
+                                "cancel",
+                                () => SharkGame.Save.importData(importText),
+                            );
                         }
                     }),
             ),
@@ -375,13 +381,21 @@ SharkGame.PaneHandler = {
                         .html(`save ${tag}`)
                         .addClass("option-button")
                         .on("click", () => {
-                            if (SharkGame.Save.savedGameExists(`Backup${tag}`)) {
-                                if (!confirm("There is already a save in this slot. Overwrite it?")) {
-                                    return;
-                                }
+                            function saveBackup() {
+                                SharkGame.Save.createTaggedSave(`Backup${tag}`);
+                                $(`#load${tag}`).removeClass("disabled");
                             }
-                            SharkGame.Save.createTaggedSave(`Backup${tag}`);
-                            $(`#load${tag}`).removeClass("disabled");
+                            if (SharkGame.Save.savedGameExists(`Backup${tag}`)) {
+                                SharkGame.PaneHandler.showConfirmMenu(
+                                    "Overwrite Backup",
+                                    "There is already a save in this slot. Overwrite it?",
+                                    "overwrite",
+                                    "cancel",
+                                    saveBackup,
+                                );
+                            } else {
+                                saveBackup();
+                            }
                         }),
                 ),
             );
@@ -392,13 +406,13 @@ SharkGame.PaneHandler = {
                 .addClass("option-button")
                 .on("click", () => {
                     if (!$(`#load${tag}`).hasClass("disabled") && SharkGame.Save.savedGameExists(`Backup${tag}`)) {
-                        if (
-                            confirm(
-                                `Are you absolutely sure you want to load this save${SharkGame.Save.getTaggedSaveCharacteristics(`Backup${tag}`)}?`,
-                            )
-                        ) {
-                            SharkGame.Save.loadTaggedSave(`Backup${tag}`);
-                        }
+                        SharkGame.PaneHandler.showConfirmMenu(
+                            "Load Backup",
+                            `Are you absolutely sure you want to load this save${SharkGame.Save.getTaggedSaveCharacteristics(`Backup${tag}`)}?`,
+                            "load",
+                            "cancel",
+                            () => SharkGame.Save.loadTaggedSave(`Backup${tag}`),
+                        );
                     }
                 });
 
@@ -418,13 +432,13 @@ SharkGame.PaneHandler = {
                 .addClass("option-button")
                 .on("click", () => {
                     if (!$("#loadCheats").hasClass("disabled") && SharkGame.Save.savedGameExists("BackupCheats")) {
-                        if (
-                            confirm(
-                                `Are you absolutely sure you want to load this save${SharkGame.Save.getTaggedSaveCharacteristics("BackupCheats")}?`,
-                            )
-                        ) {
-                            SharkGame.Save.loadTaggedSave("BackupCheats");
-                        }
+                        SharkGame.PaneHandler.showConfirmMenu(
+                            "Load Backup",
+                            `Are you absolutely sure you want to load this save${SharkGame.Save.getTaggedSaveCharacteristics("BackupCheats")}?`,
+                            "load",
+                            "cancel",
+                            () => SharkGame.Save.loadTaggedSave("BackupCheats"),
+                        );
                     }
                 });
 
@@ -445,19 +459,25 @@ SharkGame.PaneHandler = {
                     .html("wipe")
                     .addClass("option-button")
                     .on("click", () => {
-                        if (confirm("Are you absolutely sure you want to wipe your settings to default?")) {
-                            $.each(SharkGame.Settings.current, (settingName) => {
-                                if (SharkGame.Settings[settingName]) {
-                                    SharkGame.Settings.current[settingName] = SharkGame.Settings[settingName].defaultSetting;
-                                    if (typeof SharkGame.Settings[settingName].onChange === "function") {
-                                        SharkGame.Settings[settingName].onChange();
+                        SharkGame.PaneHandler.showConfirmMenu(
+                            "Wipe Settings",
+                            "Are you absolutely sure you want to wipe your settings to default?",
+                            "wipe",
+                            "cancel",
+                            () => {
+                                $.each(SharkGame.Settings.current, (settingName) => {
+                                    if (SharkGame.Settings[settingName]) {
+                                        SharkGame.Settings.current[settingName] = SharkGame.Settings[settingName].defaultSetting;
+                                        if (typeof SharkGame.Settings[settingName].onChange === "function") {
+                                            SharkGame.Settings[settingName].onChange();
+                                        }
                                     }
-                                }
-                            });
-                            SharkGame.Keybinds.resetKeybindsToDefault();
-                            SharkGame.PaneHandler.nextPaneInStack();
-                            SharkGame.PaneHandler.showOptions();
-                        }
+                                });
+                                SharkGame.Keybinds.resetKeybindsToDefault();
+                                SharkGame.PaneHandler.nextPaneInStack();
+                                SharkGame.PaneHandler.showOptions();
+                            },
+                        );
                     }),
             ),
         );
@@ -475,9 +495,13 @@ SharkGame.PaneHandler = {
                     .html("wipe")
                     .addClass("option-button")
                     .on("click", () => {
-                        if (confirm("Are you absolutely sure you want to wipe your save?\nIt'll be gone forever!")) {
-                            main.resetGame();
-                        }
+                        SharkGame.PaneHandler.showConfirmMenu(
+                            "Wipe Save",
+                            "Are you absolutely sure you want to wipe your save?<br>It'll be gone forever!",
+                            "wipe",
+                            "cancel",
+                            main.resetGame,
+                        );
                     }),
             ),
         );
@@ -582,18 +606,7 @@ SharkGame.PaneHandler = {
             row.append($("<td>").html(boundKey));
 
             if (SharkGame.Keybinds.actions.includes(boundAction)) {
-                const selector = $("<select>").on("change", function () {
-                    SharkGame.Keybinds.addKeybind(boundKey, $(this)[0].value);
-                    console.debug(`bound ${boundKey} to ${$(this)[0].value}`);
-                });
-                _.each(SharkGame.Keybinds.actions, (potentialBoundAction, i) => {
-                    selector.append(
-                        `<option${i % 2 === 0 ? ' class="evenMessage"' : ""} ${boundAction === potentialBoundAction ? " selected" : ""}>` +
-                            potentialBoundAction +
-                            "</option>",
-                    );
-                });
-                row.append(selector);
+                row.append($("<td>").append(SharkGame.PaneHandler.makeKeybindDropdown(boundKey, boundAction)));
             } else {
                 row.append($("<td>").html(SharkGame.Keybinds.cleanActionID(boundAction)));
             }
@@ -630,43 +643,52 @@ SharkGame.PaneHandler = {
         SharkGame.PaneHandler.addPaneToStack("Changelog", changelogContent);
     },
 
-    showSkipMenu() {
-        const skipDiv = $("<div>");
-        skipDiv.append(
-            $("<p>")
-                .html("If a world is causing you too much trouble, you can choose to go back to the gateway.<br>Want to go back to the gateway?")
-                .addClass("paneContentDiv"),
-        );
+    makeKeybindDropdown(boundKey, boundAction) {
+        const dropdown = $("<div>").addClass("keybindDropdown");
+        const current = $("<div>").addClass("keybindDropdownCurrent").html(boundAction);
+        const list = $("<div>").addClass("keybindDropdownList").hide();
 
-        // stolen gateway menu hehe
-        const skipButtons = $("<div>").addClass("gatewayButtonList");
-        SharkGame.Button.makeButton("stayHere", "Stay here", skipButtons, SharkGame.PaneHandler.nextPaneInStack);
-        SharkGame.Button.makeButton("goToGateway", "Go to gateway", skipButtons, () => {
-            SharkGame.wonGame = false;
-            main.endGame();
+        _.each(SharkGame.Keybinds.actions, (action) => {
+            $("<div>")
+                .addClass("keybindDropdownOption")
+                .html(action)
+                .on("click", () => {
+                    current.html(action);
+                    list.hide();
+                    SharkGame.Keybinds.addKeybind(boundKey, action);
+                    console.debug(`bound ${boundKey} to ${action}`);
+                })
+                .appendTo(list);
         });
-        skipDiv.append(skipButtons);
 
-        SharkGame.PaneHandler.addPaneToStack("Skip World", skipDiv);
+        current.on("click", (event) => {
+            event.stopPropagation();
+            $(".keybindDropdownList").not(list).hide();
+            list.toggle();
+            $(document).one("click", () => list.hide());
+        });
+
+        dropdown.append(current, list);
+        return dropdown;
     },
 
-    showResetMenu() {
-        const resetDiv = $("<div>");
-        resetDiv.append(
+    showConfirmMenu(title, text, yesText, noText, onYes) {
+        const confirmDiv = $("<div>");
+        confirmDiv.append(
             $("<p>")
-                .html("Are you sure you would like to reset your game?<br>You will lose <strong>ALL</strong> your progress.")
+                .html(text + "<br><br>")
                 .addClass("paneContentDiv"),
         );
 
-        const resetButtons = $("<div>").addClass("gatewayButtonList");
-        SharkGame.Button.makeButton("doReset", "reset", resetButtons, () => {
-            SharkGame.PaneHandler.wipeStack();
-            main.resetGame();
+        const confirmButtons = $("<div>").addClass("gatewayButtonList");
+        SharkGame.Button.makeButton("confirmYes", yesText, confirmButtons, () => {
+            SharkGame.PaneHandler.nextPaneInStack();
+            onYes();
         });
-        SharkGame.Button.makeButton("dontReset", "do not reset", resetButtons, SharkGame.PaneHandler.nextPaneInStack);
-        resetDiv.append(resetButtons);
+        SharkGame.Button.makeButton("confirmNo", noText, confirmButtons, SharkGame.PaneHandler.nextPaneInStack);
+        confirmDiv.append(confirmButtons);
 
-        SharkGame.PaneHandler.addPaneToStack("Reset Game", resetDiv);
+        SharkGame.PaneHandler.addPaneToStack(title, confirmDiv);
     },
 
     showHelp() {

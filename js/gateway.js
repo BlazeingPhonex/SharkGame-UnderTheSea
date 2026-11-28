@@ -595,9 +595,13 @@ SharkGame.Gateway = {
                 if (SharkGame.Aspects.cleanSlate.level) {
                     SharkGame.Button.makeButton("respecModeButton", "respec mode", buttonDiv, tree.toggleRefundMode);
                     SharkGame.Button.makeButton("respecButton", "respec all", buttonDiv, () => {
-                        if (confirm("Are you sure you want to respec all refundable aspects?")) {
-                            tree.respecTree();
-                        }
+                        SharkGame.PaneHandler.showConfirmMenu(
+                            "Respec All",
+                            "Are you sure you want to respec all refundable aspects?",
+                            "respec",
+                            "cancel",
+                            () => tree.respecTree(),
+                        );
                     });
                 }
 
@@ -775,19 +779,7 @@ SharkGame.Gateway = {
             // add confirm button
             const confirmButtonDiv = $("<div>");
             SharkGame.Button.makeButton("progress", "proceed", confirmButtonDiv, () => {
-                function checkAspects() {
-                    let doProceed = true;
-                    $.each(SharkGame.Aspects, (_aspectName, aspectData) => {
-                        if (aspectData.level && !aspectData.core) {
-                            doProceed = confirm(
-                                "Woah, hold on! Only CORE ASPECTS work when scouting, but you have some that aren't! If you continue, these non-core aspects will stop working until you leave. Are you sure that you want to proceed?",
-                            );
-                            return false;
-                        }
-                    });
-                    return doProceed;
-                }
-                if (gateway.completedWorlds.includes(gateway.selectedWorld) || checkAspects()) {
+                function goToWorld() {
                     if (SharkGame.persistentFlags.minuteStorage > 1000) {
                         gateway.ui.showMinuteHandStorageExtraction(gateway.selectedWorld);
                     } else {
@@ -795,6 +787,24 @@ SharkGame.Gateway = {
                         world.worldType = gateway.selectedWorld;
                         main.loopGame();
                     }
+                }
+                let hasNonCore = false;
+                $.each(SharkGame.Aspects, (_aspectName, aspectData) => {
+                    if (aspectData.level && !aspectData.core) {
+                        hasNonCore = true;
+                        return false;
+                    }
+                });
+                if (!gateway.completedWorlds.includes(gateway.selectedWorld) && hasNonCore) {
+                    SharkGame.PaneHandler.showConfirmMenu(
+                        "Hold On!",
+                        "Woah, hold on! Only CORE ASPECTS work when scouting, but you have some that aren't! If you continue, these non-core aspects will stop working until you leave. Are you sure that you want to proceed?",
+                        "proceed",
+                        "go back",
+                        goToWorld,
+                    );
+                } else {
+                    goToWorld();
                 }
             });
             gatewayContent.append(confirmButtonDiv);

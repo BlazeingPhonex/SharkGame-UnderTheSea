@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*------------------------------------------------------
   MIXINS
 -------------------------------------------------------*/
@@ -1758,6 +1759,7 @@ button.planetButton:active {
 
 #keybindTable td {
   padding: 0.2rem;
+  vertical-align: top;
 }
 
 #keybind-overlay-container {
@@ -1780,6 +1782,78 @@ select .evenMessage {
 
 option {
   direction: rtl;
+}
+
+.keybindDropdown {
+  text-align: right;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.keybindDropdownCurrent {
+  background-color: var(--color-darker);
+  padding: 0.1em 0.5em;
+}
+.keybindDropdownCurrent::after {
+  content: " ⌄";
+}
+
+.keybindDropdownList {
+  max-height: 15em;
+  overflow-y: auto;
+  border: 2px solid var(--color-lighter);
+  margin-top: 2px;
+}
+
+.keybindDropdownOption {
+  background-color: var(--color-darker);
+  border-bottom: 2px solid var(--color-lighter);
+  padding: 0.3em 0.5em;
+}
+.keybindDropdownOption:last-child {
+  border-bottom: none;
+}
+.keybindDropdownOption:hover {
+  background-color: var(--color-dark);
+}
+
+.gateway .keybindDropdownCurrent,
+.gateway .keybindDropdownOption,
+.gateway #importExportField {
+  background-color: rgb(6.6772655008%, 19.7933227345%, 15.5007949126%);
+}
+.gateway .keybindDropdownList,
+.gateway .keybindDropdownOption,
+.gateway #importExportField {
+  border-color: #ace3d1;
+}
+.gateway .keybindDropdownOption:hover {
+  background-color: rgb(21.8124006359%, 64.6581875994%, 50.6359300477%);
+}
+.gateway .keybindDropdownList::-webkit-scrollbar-track {
+  background: rgb(21.8124006359%, 64.6581875994%, 50.6359300477%);
+}
+.gateway .keybindDropdownList::-webkit-scrollbar-thumb {
+  background-color: rgb(37.5410704822%, 78.929517753%, 65.3842077371%);
+}
+.gateway #importExportField {
+  width: auto;
+  text-align: left;
+}
+
+#importExportField {
+  background-color: var(--color-darker);
+  color: white;
+  border: 2px solid var(--color-lighter);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 0.2em 0.4em;
+  font-size: inherit;
 }
 
 /*# sourceMappingURL=style.css.map */
