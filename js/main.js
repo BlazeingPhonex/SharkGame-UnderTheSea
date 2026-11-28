@@ -915,8 +915,7 @@ SharkGame.Changelog = {
         "Added the wiki to the game officially so Fandom is no longer used",
         "Replaced all browser pop-ups with official menus",
         "Added confirmation menus to the Discord and Back to Hub buttons! (Perhaps may save a minute or two of progress on accidental click)",
-        "Added a custom dropdown menu to keybinds and slightly modified look of the import/export box",
-        "The import/export and keybind dropdown now matches world theme",
+        "Added a custom dropdown menu to keybinds and slightly modified look of the import/export box, both now match world theme",
     ],
     "<a href='https://github.com/Toby222/SharkGame'>New Frontiers</a> patch 20261103a": [
         "Added a reimagined Chaotic world back into the game, courtesy of <a href='https://github.com/glowkate'>Glowkate</a>!",
